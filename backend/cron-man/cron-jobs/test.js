@@ -1,6 +1,7 @@
 const axios = require('axios');
 
 const Sequelize = require('sequelize');
+const hbjs = require('handbrake-js');
 const path = require('path');
 const fs = require('fs');
 const colors = require('colors');

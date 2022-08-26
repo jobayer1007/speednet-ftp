@@ -82,7 +82,7 @@ exports.getAllMovies = asyncHandler(async (req, res) => {
 exports.movieById = asyncHandler(async (req, res) => {
   const { id } = req.params;
   const movie = await models.Movie.findOne({
-    where: { movieId: id },
+    where: { tmdb_id: id },
     include: [
       {
         model: Genere,

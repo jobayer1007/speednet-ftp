@@ -51,7 +51,7 @@ const MovieList = (props) => {
     }
   }, [dispatch, props.type]);
 
-  console.log(movies);
+  // console.log(movies);
 
   return (
     <div className='movie-list'>
