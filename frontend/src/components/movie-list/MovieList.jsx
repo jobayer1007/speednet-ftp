@@ -12,9 +12,17 @@ import tmdbApi, { category } from '../../api/tmdbApi';
 import apiConfig from '../../api/apiConfig';
 
 import MovieCard from '../movie-card/MovieCard';
+import { useDispatch, useSelector } from 'react-redux';
+import { allMovie } from '../../actions/movieActions';
+import Loader from '../Loader';
+import Message from '../Message';
 
 const MovieList = (props) => {
+  const dispatch = useDispatch();
   const [items, setItems] = useState([]);
+
+  const movieAll = useSelector((state) => state.movieAll);
+  const { loading, error, movies } = movieAll;
 
   useEffect(() => {
     const getList = async () => {
@@ -37,14 +45,37 @@ const MovieList = (props) => {
     getList();
   }, []);
 
+  useEffect(() => {
+    if (props.type !== 'recent') {
+      dispatch(allMovie());
+    }
+  }, [dispatch, props.type]);
+
+  console.log(movies);
+
   return (
     <div className='movie-list'>
       <Swiper grabCursor={true} spaceBetween={10} slidesPerView={'auto'}>
-        {items.map((item, i) => (
-          <SwiperSlide key={i}>
-            <MovieCard item={item} category={props.category} />
-          </SwiperSlide>
-        ))}
+        {props.type === 'recent' ? (
+          loading ? (
+            <Loader />
+          ) : error ? (
+            <Message variant='danger'>{error}</Message>
+          ) : (
+            movies &&
+            movies.map((item, i) => (
+              <SwiperSlide key={i}>
+                <MovieCard item={item} category={props.category} />
+              </SwiperSlide>
+            ))
+          )
+        ) : (
+          items.map((item, i) => (
+            <SwiperSlide key={i}>
+              <MovieCard item={item} category={props.category} />
+            </SwiperSlide>
+          ))
+        )}
       </Swiper>
     </div>
   );

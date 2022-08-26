@@ -37,6 +37,7 @@ body {
 a {
     text-decoration: none;
     color: unset;
+    cursor: pointer;
 }
 
 @media (hover: hover) {
@@ -81,4 +82,11 @@ iframe {
 
 .section__header {
     @include flex(center, space-between);
+
 }
+
+.section__header h4 {
+    font-weight: 700;
+}
+
+

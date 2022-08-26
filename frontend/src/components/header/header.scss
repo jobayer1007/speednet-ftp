@@ -8,11 +8,13 @@
 
     img {
         margin-right: 10px;
-        width: 50px;
+        width: 250px;
+
 
         @include mobile {
-            width: 30px;
+            width: 150px;
             margin-right: 0;
+            
         }
     }
 }
@@ -37,7 +39,7 @@
         padding: 0 2rem;
 
         @include mobile {
-            justify-content: center;
+            justify-content: space-between;
         }
     }
 

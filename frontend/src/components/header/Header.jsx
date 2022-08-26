@@ -4,9 +4,23 @@ import { Link, useLocation } from 'react-router-dom';
 
 import './header.scss';
 
-import logo from '../../assets/tmovie.png';
+import logo from '../../assets/blurays-logo-7.png';
+import MovieSearch from '../movie-search/MovieSearch';
+import MegaNavbar from '../Navbar/MegaNavbar/MegaNavbar';
 
 const headerNav = [
+  {
+    display: 'Home',
+    path: '/',
+  },
+  {
+    display: 'Movies',
+    path: '/movie',
+  },
+  {
+    display: 'TV Series',
+    path: '/tv',
+  },
   {
     display: 'Home',
     path: '/',
@@ -48,16 +62,15 @@ const Header = () => {
     <div ref={headerRef} className='header'>
       <div className='header__wrap container'>
         <div className='logo'>
-          <img src={logo} alt='' />
-          <Link to='/'>speed4you</Link>
+          <Link to='/'>
+            <img src={logo} alt='speed4you' />
+          </Link>
+
+          {/* <Link to='/'>speed4you</Link> */}
         </div>
-        <ul className='header__nav'>
-          {headerNav.map((e, i) => (
-            <li key={i} className={`${i === active ? 'active' : ''}`}>
-              <Link to={e.path}>{e.display}</Link>
-            </li>
-          ))}
-        </ul>
+        <div className='section mb-3'>
+          <MovieSearch category={'category'} keyword={'keyword'} />
+        </div>
       </div>
     </div>
   );

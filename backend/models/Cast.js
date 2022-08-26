@@ -21,9 +21,6 @@ const Cast = (sequelize, DataTypes) =>
 
     profile_path: {
       type: DataTypes.STRING,
-      required: true,
-      allowNull: false,
-      notEmpty: true,
     },
   });
 

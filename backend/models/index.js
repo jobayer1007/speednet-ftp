@@ -57,6 +57,13 @@ sequelize
   .catch((err) => console.error(err.message.red.underline.bold));
 
 // //Models/tables
+db.User = require('../models/User')(sequelize, Sequelize);
+
+// Menus
+db.Menu = require('../models/Menu')(sequelize, Sequelize);
+db.SubMenu = require('../models/SubMenu')(sequelize, Sequelize);
+db.SubMenuL1 = require('../models/SubMenuL1')(sequelize, Sequelize);
+
 db.Movie = require('../models/Movie')(sequelize, Sequelize);
 db.Genere = require('../models/Genere')(sequelize, Sequelize);
 db.Country = require('../models/Country')(sequelize, Sequelize);
@@ -78,7 +85,12 @@ db.Language.belongsToMany(db.Movie, { through: 'LanguageMovies' });
 db.Movie.belongsToMany(db.Cast, { through: 'CastMovies' });
 db.Cast.belongsToMany(db.Movie, { through: 'CastMovies' });
 
-// db.Gender.hasMany(db.Cast, { foreignKey: 'genderId' });
-// db.Cast.belongsTo(db.Gender, { foreignKey: 'genderId' });
+// Menu - Submenu
+db.Menu.hasMany(db.SubMenu, { foreignKey: 'menuId' });
+db.SubMenu.belongsTo(db.Menu, { foreignKey: 'menuId' });
+
+// Submenu - SubMenuL1
+db.SubMenu.hasMany(db.SubMenuL1, { foreignKey: 'subMenuId' });
+db.SubMenu.belongsTo(db.SubMenuL1, { foreignKey: 'subMenuId' });
 
 module.exports = db;

@@ -1,0 +1,99 @@
+[
+  {
+    "name": "Live TV",
+    "url": "/",    
+    "subMenu": [
+      {
+        "name": "T Sports Live",
+        "url": "https://www.google.com/"
+      },
+      {
+        "name": "Live TV One",
+        "url": "/"
+      },
+      {
+        "name": "Live TV JagoBD Beta",
+        "url": "/"
+      },
+      {
+        "name": "Live Sports All",
+        "url": "/"
+      }
+    ]
+  },
+  
+  {
+    "name": "Movies",
+    "url": "/movies",
+    "subMenu": [
+      {
+        "name": "English Movies",
+        "url": "/english"
+      },
+      {
+        "name": "Hindi Movies",
+        "url": "/hindi"
+      },
+      {
+        "name": "South Indian Movies",
+        "url": "/southindial"
+      },
+      {
+        "name": "Bangla Movies",
+        "url": "/bangla"
+      }
+    ]
+  },
+  {
+    "name": "TV Series",
+    "url": "/tvseries"
+  },
+  
+  
+  {
+    "name": "Requested",
+    "url": "/requested"
+  },
+  
+  {
+    "name": "Games",
+    "url": "/games"
+  },
+ 
+ 
+ 
+  {
+    "name": "Others",
+    "url": "/others",
+    "subMenu": [
+      {
+        "name": "Softwares",
+        "url": "/softwares"
+      },
+      {
+        "name": "Tutorials",
+        "url": "/tutorials"
+      },
+      {
+        "name": "Documentary",
+        "url": "/documentary"
+      },
+      {
+        "name": "animated",
+        "url": "/animated"
+      },
+      {
+        "name": "E-book",
+        "url": "/ebook"
+      },
+      {
+        "name": "Partner FTPs",
+        "url": "/partnerftps"
+      },
+      {
+        "name": "index",
+        "url": "/data"
+      }
+    ]
+  }
+]

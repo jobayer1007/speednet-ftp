@@ -1,0 +1,97 @@
+[
+  {
+    "display": "Live TV",
+    "path": "/",    
+    "subMenu": [
+      {
+        "display": "T Sports Live",
+        "path": "/"
+      },
+      {
+        "display": "Live TV One",
+        "path": "/"
+      },
+      {
+        "display": "Live TV JagoBD Beta",
+        "path": "/"
+      },
+      {
+        "display": "Live Sports All",
+        "path": "/"
+      }
+    ]
+  },
+  {
+    "display": "index",
+    "path": "/data"
+  },
+  {
+    "display": "Movies",
+    "path": "/movies",
+    "subMenu": [
+      {
+        "display": "English Movies",
+        "path": "/english"
+      },
+      {
+        "display": "Hindi Movies",
+        "path": "/hindi"
+      },
+      {
+        "display": "South Indian Movies",
+        "path": "/southindial"
+      },
+      {
+        "display": "Bangla Movies",
+        "path": "/bangla"
+      }
+    ]
+  },
+  {
+    "display": "TV Series",
+    "path": "/tvseries"
+  },
+  
+  
+  {
+    "display": "Requested",
+    "path": "/requested"
+  },
+  
+ 
+ 
+  {
+    "display": "Partner FTPs",
+    "path": "/partnerftps"
+  },
+  {
+    "display": "Others",
+    "path": "/others",
+    "subMenu": [
+      {
+        "display": "Games",
+        "path": "/games"
+      },
+      {
+        "display": "Softwares",
+        "path": "/softwares"
+      },
+      {
+        "display": "Tutorials",
+        "path": "/tutorials"
+      },
+      {
+        "display": "Documentary",
+        "path": "/documentary"
+      },
+      {
+        "display": "animated",
+        "path": "/animated"
+      },
+      {
+        "display": "E-book",
+        "path": "/ebook"
+      }
+    ]
+  }
+]

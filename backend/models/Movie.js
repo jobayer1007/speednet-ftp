@@ -79,9 +79,13 @@ const Movie = (sequelize, DataTypes) =>
 
     tagline: {
       type: DataTypes.STRING,
-      required: true,
-      allowNull: false,
-      notEmpty: true,
+      // required: true,
+      // allowNull: false,
+      // notEmpty: true,
+    },
+
+    file_path: {
+      type: DataTypes.STRING,
     },
   });
 

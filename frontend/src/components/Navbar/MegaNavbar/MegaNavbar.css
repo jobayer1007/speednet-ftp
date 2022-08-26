@@ -1,0 +1,108 @@
+.navbar {
+  padding-top: 120px;
+}
+
+.navbar .megamenu {
+  padding: 1rem;
+  opacity: 0.95;
+}
+
+
+.navbar span {
+  font-size: 1.3rem;
+  font-weight: 700;
+}
+
+/* .navbar span:hover {
+  color: #fff;
+} */
+
+/* ============ desktop view ============ */
+@media all and (min-width: 992px) {
+
+  .navbar .has-megamenu {
+    position: static !important;
+  }
+
+
+  .navbar .megamenu {
+    left: 0;
+    right: 0;
+    width: 100%;
+    margin-top: 0;
+    /* padding-top: 120px; */
+  }
+
+}
+
+
+
+/* ============ desktop view .end// ============ */
+
+
+/* ============ mobile view ============ */
+@media(max-width: 991px) {
+
+  .navbar.fixed-top .navbar-collapse,
+  .navbar.sticky-top .navbar-collapse {
+    overflow-y: auto;
+    max-height: 90vh;
+    margin-top: 10px;
+  }
+}
+
+/* ============ mobile view .end// ============ */
+
+.header {
+  height: 8rem;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 99;
+  transition: height 0.3s ease, background-color 0.3s ease;
+}
+
+.header__nav1 {
+  display: flex;
+  align-items: center;
+  justify-content: unset;
+  margin-left: 2rem;
+
+}
+
+.header__nav1 li {
+  padding: 5px 0;
+  font-weight: 700;
+  position: relative;
+  font-size: 1.5rem;
+}
+
+.header__nav1 li ::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 0;
+  transition: width 0.5s ease;
+  height: 2px;
+  background-color: #ff0000;
+}
+
+.header__nav1 li .active::after,
+.header__nav1 li :hover::after {
+  width: 100%;
+}
+
+.container-fluid {
+  background-image: url("../../../assets/footer-bg.jpg");
+}
+
+.navbar {
+  background: transparent !important;
+}
+
+.offcanvas {
+  opacity: 0.95;
+}

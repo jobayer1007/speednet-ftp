@@ -3,6 +3,7 @@ const axios = require('axios');
 const Sequelize = require('sequelize');
 const path = require('path');
 const fs = require('fs');
+const colors = require('colors');
 
 const dotenv = require('dotenv');
 
@@ -11,7 +12,6 @@ dotenv.config();
 const asyncHandler = require('express-async-handler');
 const models = require('../../models/index');
 const apiConfig = require('../../api/apiConfig');
-const { Genere, Country, Language, Cast } = require('../../models/index');
 // const { generateId } = require('../../utils/generateId');
 // const { deleteDonationType } = require('../../controllers/chapterController');
 // const { sendAdminNotificationEmail } = require('../../controllers/mailer');
@@ -66,25 +66,28 @@ const test = asyncHandler(async (req, res) => {
   console.log(directoryPath);
 
   //passsing directoryPath and callback function
-  fs.readdir(directoryPath, function (err, files) {
+  fs.readdir(directoryPath, async function (err, files) {
     //handling error
     if (err) {
       return console.log('Unable to scan directory: ' + err);
     }
     //listing all files using forEach
     if (files.length !== 0) {
-      files.forEach(async function (file) {
-        // Do whatever you want to do with the file
-        console.log(file.replace(/\.[^/.]+$/, ''));
+      for (let a = 0; a < files.length; a++) {
+        const element = files[a];
+
+        console.log('Searching for: ', element.replace(/\.[^/.]+$/, ''));
         await axios
           .get(
             `${apiConfig.baseUrl}search/movie?api_key=${
               apiConfig.apiKey
-            }&query=${file.replace(/\.[^/.]+$/, '')}`
+            }&query=${element.replace(/\.[^/.]+$/, '')}`
           )
           .then(async (res) => {
             // console.log(res.data.results[0]);
             const movieData = res.data.results[0];
+
+            console.log(movieData);
 
             const movie = await models.Movie.findOne({
               where: { title: movieData.title },
@@ -101,7 +104,7 @@ const test = asyncHandler(async (req, res) => {
                 `${apiConfig.baseUrl}movie/${movieData.id}/credits?api_key=${apiConfig.apiKey}&language=en-US`
               );
               const castList = castDetails.data.cast.slice(0, 5);
-              console.log(castList);
+              // console.log(castList);
               const t = await sequelize.transaction();
 
               try {
@@ -118,6 +121,7 @@ const test = asyncHandler(async (req, res) => {
                     release_date: movieDetails.data.release_date,
                     original_language: movieDetails.data.original_language,
                     tagline: movieDetails.data.tagline,
+                    file_path: `/uploads/${element}`,
                   },
                   { transaction: t }
                 );
@@ -126,13 +130,24 @@ const test = asyncHandler(async (req, res) => {
                 for (let i = 0; i < movieDetails.data.genres.length; i++) {
                   const element = movieDetails.data.genres[i];
 
+                  console.log('loking for Genere: ', element);
+
                   const genere = await models.Genere.findOne({
                     where: { id: element.id },
                   });
 
                   if (genere) {
+                    console.log(
+                      'Genere exists, going to link to movie'.green.bold
+                        .underline
+                    );
                     await newMovie.addGeneres(genere, { transaction: t });
+                    console.log('linking done'.green.bold.underline);
                   } else {
+                    console.log(
+                      'Genere does not exists, going to create one'.green.bold
+                        .underline
+                    );
                     const newGenere = await models.Genere.create(
                       {
                         id: element.id,
@@ -140,7 +155,15 @@ const test = asyncHandler(async (req, res) => {
                       },
                       { transaction: t }
                     );
+                    console.log(
+                      'genere created, going to link to movie'.green.bold
+                        .underline
+                    );
                     await newMovie.addGeneres(newGenere, { transaction: t });
+                    console.log(
+                      'linking done for new genere to movie'.green.bold
+                        .underline
+                    );
                   }
                 }
                 // GENERE END //
@@ -236,34 +259,38 @@ const test = asyncHandler(async (req, res) => {
           })
           .catch((err) => console.log(err));
         console.log('-------------------------------------');
-      });
+      }
+      // files.forEach(async function (file) {
+      //   // Do whatever you want to do with the file
+
+      // });
     } else {
       console.log('there are no file');
     }
   });
 
-  try {
-    const movies = await models.Movie.findAll({
-      include: [
-        {
-          model: Genere,
-        },
-        {
-          model: Country,
-        },
-        {
-          model: Language,
-        },
-        {
-          model: Cast,
-        },
-      ],
-    });
+  // try {
+  //   const movies = await models.Movie.findAll({
+  //     include: [
+  //       {
+  //         model: Genere,
+  //       },
+  //       {
+  //         model: Country,
+  //       },
+  //       {
+  //         model: Language,
+  //       },
+  //       {
+  //         model: Cast,
+  //       },
+  //     ],
+  //   });
 
-    console.log(movies[0].generes);
-  } catch (error) {
-    console.log(error);
-  }
+  //   console.log(movies[0].generes);
+  // } catch (error) {
+  //   console.log(error);
+  // }
 
   console.log('Cron job done---------------------------------------');
 });
